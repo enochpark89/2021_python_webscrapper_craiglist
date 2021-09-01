@@ -11,7 +11,7 @@ craiglist_soup = BeautifulSoup(craiglist_result.text, 'html.parser')
 # Extract the total page of the query results
 total_page = craiglist_soup.find("span", {"class": "totalcount"})
 total_page = total_page.text
-
+  
 # Extract class called row from the soup.
 search_container = craiglist_soup.find("ul", {"class":"rows"})
 

@@ -1,25 +1,15 @@
-import requests
-from bs4 import BeautifulSoup
+from craiglist import extract_craiglist_pages
+from craiglist import extract_craiglist_items
+
+data = extract_craiglist_items()
 
 
-# Retrieve HTML tags with requests lib.
-craiglist_result = requests.get("https://losangeles.craigslist.org/d/appliances/search/ppa")
-
-# Parse HTML tags to BeautifulSoup format.
-craiglist_soup = BeautifulSoup(craiglist_result.text, 'html.parser')
-
-# Extract the total page of the query results
-total_page = craiglist_soup.find("span", {"class": "totalcount"})
-total_page = total_page.text
-  
-# Extract class called row from the soup.
-search_container = craiglist_soup.find("ul", {"class":"rows"})
+# # Iterate through an array and send seperate request to each pages. 
+# for n in pages:
+#     print(n)
 
 
-result_rows = search_container.find_all('li')
 
-# Iterate each result_row
-# for result in result_rows:
-#     print(result.find("a"))
+
 
 # scrapped HTML tags are displayed.

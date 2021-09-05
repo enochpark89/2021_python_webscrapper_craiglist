@@ -23,9 +23,17 @@ Libraries:
 - BeautifulSoup - extract data from HTML tags.
 
 
+# Overview:
+
+1. save.py: 
+- Uses python csv library to save the data into csv file.
+- 
+
+2. 
+
 # Development Process
 
-- Building a web scrapper:
+# 1.0: Use BeautifulSoup to scrap web pages
 
 1. Install requests library
 
@@ -58,8 +66,47 @@ craiglist_result.text
 pip install beautifulsoup4
 ```
 
-5. Use BeatifulSoup to parse the HTML data. 
+# 1.1: Setting up Flask environment. 
+
+- Flask is a lightweight Python framework for web applications that provides the basics for URL routing and page rendering.
+
+
+1. Inside the project environment, set up environment
+
+```shell
+python -m venv env
+```
+
+*Ctrl+Shift+`: Command Palette, which creates a terminal and automatically activates the virtual environment by running its activation script.*
+
+2. Update pip in the virt environment
+```shell
+python -m pip install --upgrade pip
+```
+
+3. Install flask
+```shell
+python -m pip install flask
+```
+
+4. To run the server, use below code.
+```shell
+python -m flask run
+```
+
+# 1.2: Work on the Flask
+
+1. import Flask in the app.py and start using.
 
 ```py
-
+from flask import Flask
 ```
+
+2. Use render_template from flask library to render HTML template. 
+
+```py
+from flask import Flask, render_template
+```
+
+3. Create HTML templates for use and render it in .route()
+

@@ -3,7 +3,13 @@ from bs4 import BeautifulSoup
 
 
 # Global variable that is frequently used.
-CRAIGLIST_URL = "https://losangeles.craigslist.org/d/appliances/search/ppa"
+
+# CRAIGLIST_URL_DICT will select the URL to request for depending on an user's choice.
+CRAIGLIST_URL_DICT = {
+    "Appliance": "appliances/search/ppa",
+    "Computer": "computers/search/sya",
+    "Automobile": "cars-trucks/search/cta"
+}
 CRAIGLIST_SUB = ""
 
 
@@ -50,6 +56,7 @@ def extract_craiglist_items(row):
         
     except:
         image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
+    
     title = row.find("div", {"class":"result-info"}).find("h3").text
     date = row.find("div", {"class":"result-info"}).find("time")['datetime']
     location = row.find("div", {"class":"result-info"}).find("span",{"class":"result-hood"}).text
@@ -68,8 +75,13 @@ def extract_craiglist_items(row):
 
 
 # This function will extract pages. 
-def extract_craglist_pages():
+def extract_craglist_pages(word):
     print("Scrapping the page......")
+    print(word)
+    keyword = CRAIGLIST_URL_DICT[word]
+    print(keyword)
+    CRAIGLIST_URL = f"https://losangeles.craigslist.org/d/{keyword}"
+    print(CRAIGLIST_URL)
     result = requests.get(CRAIGLIST_URL)
     soup = BeautifulSoup(result.text, 'html.parser')
     search_container = soup.find("ul", {"class":"rows"})

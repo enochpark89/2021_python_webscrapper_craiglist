@@ -1,10 +1,15 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from craiglist import extract_craiglist_pages
+from craiglist import extract_craiglist_items
+from craiglist import extract_craglist_pages
+from save import save_to_file
 from datetime import datetime
 import re
 
 # flash app created.
 app = Flask(__name__)
 
+db = {}
 
 
 # create a route to home or localhost.
@@ -12,22 +17,13 @@ app = Flask(__name__)
 def home():
     return render_template('appliance.html')
 
-# # @app.route("/hello/<name>")
-# # def hello_there(name):
-# #     now = datetime.now()
-# #     formatted_now = now.strftime("%A, %d %B, %Y at %X")
+@app.route("/report")
+def report():
+    # Get the word from the url.
+    word = request.args.get('word')
+    data = extract_craglist_pages(word)
+    return render_template('report.html', items=data)
 
-# #     # Filter the name argument to letters only using regular expressions. URL arguments
-# #     # can contain arbitrary text, so we restrict to safe characters only.
-# #     match_object = re.match("[a-zA-Z]+", name)
-
-# #     if match_object:
-# #         clean_name = match_object.group(0)
-# #     else:
-# #         clean_name = "Friend"
-
-# #     content = "Hello there, " + clean_name + "! It's " + formatted_now
-# #     return content
 
 if __name__ == '__main__':
     app.run('0.0.0.0', 8085)

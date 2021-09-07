@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appliance page</title>
+    <style>
+        section {
+            display:grid;
+            grid-template-columns: repeat(5,1fr);
+        }
+        section > h4,span,img{
+            padding: 15px;
+            text-align: center;
+            border: 1px solid black;
+            margin:0 -1px -1px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Results:</h1>
+    <p>We are now searching {{keyword}}</p>
+    <section>
+        <h4>Posted Date</h4>
+        <h4>Title</h4>
+        <h4>Image</h4>
+        <h4>Location</h4>
+        <h4>Price</h4>
+        {% for item in items %}
+            <span>{{item.date}}</span>
+            <span>{{item.title}}</span>
+            <img src="{{item.image_url}}">
+            <span>{{item.location}}</span>
+            <span>{{item.price}}</span>
+        {% endfor %}
+    </section>>
+</body>
+</html>

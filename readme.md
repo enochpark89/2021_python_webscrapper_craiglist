@@ -96,7 +96,9 @@ python -m flask run
 
 # 1.2: Work on the Flask
 
-1. import Flask in the app.py and start using.
+
+## Render the template on the localhost.
+1. Import Flask in the app.py and start using.
 
 ```py
 from flask import Flask
@@ -109,4 +111,47 @@ from flask import Flask, render_template
 ```
 
 3. Create HTML templates for use and render it in .route()
+```
+@app.route("/")
+def home():
+    return render_template('appliance.html')
 
+```
+
+## Create a form
+
+1. Send data from a form
+
+```html
+    <form action="/report" method="get">
+        <input placeholder='Search for a job' required name="word" />
+        <button>Search</button>
+        <h3>changed</h3>
+    </form>
+```
+- URL before: http://127.0.0.1:5000/
+- URL after: http://127.0.0.1:5000/report?word=dfsfasd
+
+- Pattern: <action word>?<name>=<query argument>
+*When you search from the Google, you will notice the query argument also.*
+
+2. Create a new route that correspond with the action word. 
+- This particular example: report
+```py
+@app.route("/report")
+def report():
+    return "This is the report"
+
+```
+- Report will show the return string, but the url keeps the word received from an user. 
+
+3. Get the keyword from the URL. 
+
+- If you want to get the keyword from the URL, you have to simply get the argument from the request. 
+
+@app.route("/report")
+def report():
+    # Get the word from the url.
+    word = request.args.get('word')
+    print(word)
+    return render_template('report.html')

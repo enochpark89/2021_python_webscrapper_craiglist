@@ -155,3 +155,49 @@ def report():
     word = request.args.get('word')
     print(word)
     return render_template('report.html')
+
+
+
+# 1.3: Deployment with heroku
+
+- Deploy using heroku steps:
+
+1. Create requirements.txt that shows what to install to launch this app. 
+```py
+pip freeze > requirements.txt
+```
+
+2. Create a 'Procfile.txt' in the root directory.
+
+3. Add below to Procfile.txt
+```
+web: gunicorn app:app
+```
+
+4. Install heroku
+
+```bash
+npm install -g heroku
+```
+
+5. Verify version
+
+```bash
+heroku --version
+```
+
+6. Login to heroku using the browser login
+```bash
+heroku login
+```
+
+7. Add your project to heroku from github
+
+```bash
+ heroku git:remote -a {your-project-name}
+```
+- this particular case
+```
+heroku git:remote -a {2021_python_webscrapper_craiglist}
+
+```

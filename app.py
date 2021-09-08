@@ -22,8 +22,8 @@ def report():
     # Get the word from the url.
     word = request.args.get('word')
     data = extract_craglist_pages(word)
-    return render_template('report.html', items=data)
+    return render_template('report.html', keyword=word, items=data)
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', 8085)
+    app.run(threaded=True, port=5000)

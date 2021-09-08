@@ -7,31 +7,44 @@
     <title>Appliance page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            margin-top: 40px;
+        }
+        form{
+            margin-top: 40px;
+        }
+        #loading{
+            margin-top:40px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Select Data that you want to scrape from Craiglist.com</h1>
+    <div class="col-xs-1" align="center">
 
-    <form action="/report" method="get">
-        <input id="btn" type="submit" value="Appliance" name="word"/>
-        <input type="submit" value="Automobile" name="word"/>
-        <input type="submit" value="Computer" name="word"/>
-    </form>
+        <h1>Select a category of data that you want to scrape from <em>Craiglist.org</em>:</h1>
 
-    <button >testing</button>
+        <form action="/report" method="get">
+            <input class="btn--1" type="submit" value="Appliance" name="word"/>
+            <input class="btn--2" type="submit" value="Automobile" name="word"/>
+            <input class="btn--3"type="submit" value="Computer" name="word"/>
+        </form>
 
-    <div id="loading" class="container-fluid" style="display:none;">
-        
-        <h2>Loading......</h2>
-        <div class="progress" style="width: 75%">
-            <div id="progress_bar" style="width: 0%;" class="progress-bar">75%</div>
+        <div id="loading" class="container-fluid" style="display:none;">
+            
+            <h2>Scraping......</h2>
+            <div class="progress" style="width: 75%">
+                <div id="progress_bar" style="width: 0%;" class="progress-bar">0%</div>
+            </div>
         </div>
     </div>
-
     <script>
         let container = document.getElementById('loading');
         let progress_bar = document.getElementById('progress_bar');
-        let btn = document.getElementById('btn');
-
+        // select all buttons that start with a class named 'btn'.
+        let allBtns = document.querySelectorAll('input[class^=btn]');
+        
+        // Make the container of progress bar appear.
         function showbar() {
             container.style.display = 'block';
             setTimeout(changeToTenth, 3000)
@@ -58,6 +71,12 @@
         function changeToSeventyFive() {
             progress_bar.style = "width: 75%"
             progress_bar.innerText = "75%"
+            setTimeout(changeToNinety, 2000)
+        }
+
+        function changeToNinety() {
+            progress_bar.style = "width: 90%"
+            progress_bar.innerText = "90%"
             setTimeout(changeToHundred, 5000)
         }
 
@@ -66,8 +85,10 @@
         progress_bar.innerText = "100%"
 
         }
-
-        btn.addEventListener('click', showbar);
+        // the same progress bar shows when one of 3 buttons are clicked.
+        for (var i = 0; i < allBtns.length; i++) {
+            allBtns[i].addEventListener("click", showbar);
+        }
     </script>
 </body>
 </html>

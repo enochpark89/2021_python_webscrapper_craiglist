@@ -5,36 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appliance page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
         section {
             display:grid;
-            grid-template-columns: repeat(5,1fr);
+            grid-template-columns: repeat(7,1fr);
+            max-width: 1500px;
         }
-        section > h4,span,img{
+        section > *{
             padding: 15px;
             text-align: center;
-            border: 1px solid black;
-            margin:0 -1px -1px 0;
+            border: 3px solid black;
+            margin:0 -3px -3px 0;
         }
 
+        section > div {
+            max-width: 500px;
+        }
     </style>
 </head>
 <body>
-    <h1>Results:</h1>
-    <p>We are now searching {{keyword}}</p>
-    <section>
-        <h4>Posted Date</h4>
-        <h4>Title</h4>
-        <h4>Image</h4>
-        <h4>Location</h4>
-        <h4>Price</h4>
-        {% for item in items %}
-            <span>{{item.date}}</span>
-            <span>{{item.title}}</span>
-            <img src="{{item.image_url}}">
-            <span>{{item.location}}</span>
-            <span>{{item.price}}</span>
-        {% endfor %}
-    </section>>
+    <div class="col-xs-1" align="center">
+        <h1>Results:</h1>
+        <p>You searched for <b>{{keyword}}</b></p>
+        <section>
+            <h4>List Number</h4>
+            <h4>Posted Date</h4>
+            <h4>Title</h4>
+            <h4>Image</h4>
+            <h4>Location</h4>
+            <h4>Price</h4>
+            <h4>Details</h4>
+            {% for item in items %}
+                <span>{{item.index}}</span>
+                <span>{{item.date}}</span>
+                <span>{{item.title}}</span>
+                <img src="{{item.image_url}}" width="450px" height="300px">
+                <span>{{item.location}}</span>
+                <span>{{item.price}}</span>
+                <div>{{item.detail}}</div>
+            {% endfor %}
+        </section>
+    </div>
 </body>
 </html>

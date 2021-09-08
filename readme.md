@@ -198,6 +198,6 @@ heroku login
 ```
 - this particular case
 ```
-heroku git:remote -a {2021_python_webscrapper_craiglist}
+heroku git:remote -a enoch-criaglist-webscrapper
 
 ```
